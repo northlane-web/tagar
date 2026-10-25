@@ -208,7 +208,7 @@
 
 <script>
   // ====== הגדרה: כאן יודבק כתובת ה-Apps Script אחרי שנקים אותו ======
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXn_d3H4DNkLQ6XGX8VuQRFo-JrQCGBFg9hs_8R_LqrC7Ro5G5qS7mCee7h-MtpTmw/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXn_d3H4DNkLQ6XGX8VuQRFo-JrQCGBFg9hs_8R_LqrC7Ro5G5qS7mCee7h-MtpTmw/exec"; const FORM_KEY = "Builr1E4Fny61HhfrvVWtHLG";
 
   // ---- קליטת מקור הליד (ref + UTM) ----
   const params = new URLSearchParams(window.location.search);
@@ -243,7 +243,7 @@
         fetch(SCRIPT_URL, {
           method:'POST', mode:'no-cors',
           headers:{'Content-Type':'text/plain;charset=utf-8'},
-          body: JSON.stringify({ type:'visit', ref: sourceData.ref, landing_page: sourceData.landing_page, referrer: sourceData.referrer })
+          body: JSON.stringify({ k: FORM_KEY, type:'visit', ref: sourceData.ref, landing_page: sourceData.landing_page, referrer: sourceData.referrer })
         });
         sessionStorage.setItem(visitKey,'1');
       }
@@ -285,7 +285,7 @@
     btn.classList.add("loading");
     btn.disabled = true;
 
-    const payload = {
+    const payload = { k: FORM_KEY,
       name, phone, email,
       consent: consent ? "כן" : "לא",
       ...sourceData,
